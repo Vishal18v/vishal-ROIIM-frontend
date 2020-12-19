@@ -15,11 +15,13 @@ function App() {
 
   const makePayment = async (event) => {
     event.preventDefault()
+    setLoading(true)
+
     let token
     let id
     await axios({
       method: 'post',
-      url: 'http://localhost:5000/token',
+      url: 'http://13.250.26.160:5000/token',
       data: {
         email: email
       },
@@ -34,7 +36,6 @@ function App() {
       })
 
     console.log('customerId', id)
-    setLoading(true)
     window.paysafe.checkout.setup("cHVibGljLTc3NTE6Qi1xYTItMC01ZjAzMWNiZS0wLTMwMmQwMjE1MDA4OTBlZjI2MjI5NjU2M2FjY2QxY2I0YWFiNzkwMzIzZDJmZDU3MGQzMDIxNDUxMGJjZGFjZGFhNGYwM2Y1OTQ3N2VlZjEzZjJhZjVhZDEzZTMwNDQ=", {
       "singleUseCustomerToken": token,
       //"customerId": id,
@@ -81,7 +82,7 @@ function App() {
 
         axios({
           method: 'post',
-          url: 'http://localhost:5000/payment',
+          url: 'http://13.250.26.160:5000/payment',
           data:{
             paymentHandleToken: result.paymentHandleToken,
             amount: result.amount,
